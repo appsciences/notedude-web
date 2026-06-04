@@ -157,16 +157,23 @@
     overflow: hidden;
     box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.8),
                 0 0 0 1px rgba(141, 138, 212, 0.05);
+    contain: layout style paint;
+    height: 440px;
   }
   .demo-titlebar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 8px 14px;
     background: var(--bg-3);
     border-bottom: 1px solid var(--border);
     font-size: 11.5px;
     color: var(--fg-dim);
+    position: relative;
+  }
+  .demo-titlebar .dots {
+    position: absolute;
+    left: 14px;
   }
   .demo-titlebar .dots { display: flex; gap: 6px; }
   .demo-titlebar .dots span {
@@ -242,7 +249,7 @@
   }
   .demo-note-meta .tag { color: var(--accent); }
   .demo-detail {
-    padding: 18px 22px;
+    padding: 0 22px 18px 22px;
     color: var(--fg);
   }
   .demo-detail-title {
@@ -251,6 +258,7 @@
     color: var(--fg-bright);
     margin-bottom: 14px;
     min-height: 22px;
+    padding-top: 18px;
   }
   .demo-detail-body {
     white-space: pre-wrap;
@@ -713,10 +721,9 @@
     <div class="topbar-brand">
       <span class="prompt">&gt;</span>
       <span>note_dude</span>
-      <span class="ver">v0.4.2</span>
+      <span class="ver">v0.1.7</span>
     </div>
     <nav class="topbar-nav">
-      <a href="#features">features</a>
       <a href="#keys">keys</a>
       <a href="#changelog">changelog</a>
       <a href="#faq">faq</a>
@@ -733,16 +740,16 @@
 <div class="container">
   <header class="hero">
 <div class="hero-ascii"><span style="color:var(--fg-dim)">&gt;</span> note_dude<span class="demo-cursor" style="height:30px;margin-left:6px;"></span></div>
-    <div class="hero-tagline">notes for people who never let go of the keyboard.</div>
-    <div class="hero-sub">a lightweight, tag-driven notes &amp; todo app shaped like a terminal. <code style="color:var(--accent)">sudo make-note</code> &nbsp;— no menus, no chrome, no mouse required.</div>
+    <div class="hero-tagline">notes for impatient nerds.</div>
+    <div class="hero-sub">keyboard driven. tag centric. stupid fast. <code style="color:var(--accent)">yeah dude!</code></div>
     <div class="hero-meta">
-      <span><span class="ok">●</span> local-first</span>
-      <span class="dot">·</span>
-      <span>~38kb gzipped</span>
-      <span class="dot">·</span>
-      <span>works offline</span>
+      <span><span class="ok">●</span> featherweight</span>
       <span class="dot">·</span>
       <span>vim-style nav</span>
+      <span class="dot">·</span>
+      <span>progressive</span>
+      <span class="dot">·</span>
+      <span>best of google keep and apple notes</span>
       <span class="dot">·</span>
       <span>0 ads, 0 trackers</span>
     </div>
@@ -753,8 +760,7 @@
     <div class="demo-frame">
       <div class="demo-titlebar">
         <div class="dots"><span></span><span></span><span></span></div>
-        <div>note_dude — ~/notes</div>
-        <div class="right">⌘? for help</div>
+        <div>note_dude</div>
       </div>
       <div class="demo-app">
         <div class="demo-search">
@@ -777,58 +783,6 @@
   </div>
 </div>
 
-<!-- ─────────── FEATURES ─────────── -->
-<section id="features">
-  <div class="container">
-    <div class="section-label"><span class="hash">##</span> features</div>
-    <div class="section-title">built around the home row.</div>
-    <div class="feature-grid">
-      <div class="feature">
-        <div class="feature-head">
-          <span class="feature-num">01.</span>
-          <span class="feature-name">keyboard, all the way down</span>
-        </div>
-        <p class="feature-desc">every action has a shortcut. nothing requires a mouse. press <code>?</code> any time to see what's bound. yes, <code>hjkl</code> works.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-head">
-          <span class="feature-num">02.</span>
-          <span class="feature-name">tags are first-class</span>
-        </div>
-        <p class="feature-desc">type <code>#anything</code> mid-note and it becomes a tag. nest them like <code>#work/standup</code>. filter the whole library by typing the tag in search.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-head">
-          <span class="feature-num">03.</span>
-          <span class="feature-name">find as fast as you type</span>
-        </div>
-        <p class="feature-desc">fuzzy search across titles, bodies, and tags. press <code>/</code> from anywhere. results re-rank as you go. arrow keys to pick, enter to open.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-head">
-          <span class="feature-num">04.</span>
-          <span class="feature-name">todos that live inside notes</span>
-        </div>
-        <p class="feature-desc">type <code>[]</code> to start a checkbox. <code>⌘E</code> toggles. todos roll up into a unified <code>#todo</code> view. no separate app, no separate brain.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-head">
-          <span class="feature-num">05.</span>
-          <span class="feature-name">local-first, sync optional</span>
-        </div>
-        <p class="feature-desc">notes live in your browser's storage. nothing leaves your device unless you turn on sync. import / export to plain markdown — your data, your problem.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-head">
-          <span class="feature-num">06.</span>
-          <span class="feature-name">command palette</span>
-        </div>
-        <p class="feature-desc"><code>⌘K</code> opens a single text input that runs everything: jump to a note, run a command, change a setting. you'll never need a menu again.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ─────────── KEYBOARD CHEATSHEET ─────────── -->
 <section id="keys">
   <div class="container">
@@ -843,10 +797,6 @@
             <div class="cheat-desc">focus search</div>
           </div>
           <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">⌘</span><span class="key plus">+</span><span class="key">K</span></div>
-            <div class="cheat-desc">open command palette</div>
-          </div>
-          <div class="cheat-row">
             <div class="cheat-keys"><span class="key">j</span> <span class="key plus">/</span> <span class="key">k</span></div>
             <div class="cheat-desc">next / previous note</div>
           </div>
@@ -856,7 +806,7 @@
           </div>
           <div class="cheat-row">
             <div class="cheat-keys"><span class="key">Esc</span></div>
-            <div class="cheat-desc">leave search / close palette</div>
+            <div class="cheat-desc">leave search</div>
           </div>
         </div>
       </div>
@@ -930,17 +880,15 @@
 <!-- ─────────── FOUNDER NOTE ─────────── -->
 <section id="why">
   <div class="container">
-    <div class="section-label"><span class="hash">##</span> why this exists</div>
-    <div class="section-title">a note from the dude.</div>
+    <div class="section-label"><span class="hash">##</span> why</div>
+    <div class="section-title">why this exists.</div>
     <div class="founder">
       <div class="founder-head">
         <span class="who">&gt; cat ~/why.md</span>
         <span style="color:var(--fg-dimmer)">|</span>
         <span>last edited: a tuesday</span>
       </div>
-      <p>i kept three notes apps open. apple notes for the grocery list. notion for "real" stuff. a half-finished <code>todo.txt</code> in a terminal tab i never closed. every time i wanted to write something down i lost five seconds picking the right one and another five locating the trackpad.</p>
-      <p>so i did the engineer thing: built a worse one. but the worse one is mine, and it does exactly three things — capture, tag, find — without ever asking me to take my hands off the keys. <code>sudo make-note</code>, save, move on.</p>
-      <p>it's free because nobody is paying me to do this and i don't want to think about retention metrics. if it saves you ten seconds a day, that's enough. if you want to throw some money at it so i can keep buying coffee and domain names, the donate section is right below.</p>
+      <p>we are not entirely sure. we were frustrated by lack of keyboard support and responsiveness of existing apps. there are also so cool new features like tag-pinning*  .</p>
       <p>see you on the home row.</p>
       <div class="founder-sig">— <span class="name">the dude</span> · <span style="color:var(--accent)">$</span> whoami: a person with too many notes</div>
     </div>
@@ -959,7 +907,6 @@
           <div class="change-date">today</div>
         </div>
         <ul class="change-items">
-          <li class="fix">fix race in ⌘K palette when typing very fast</li>
           <li>add <code style="color:var(--accent)">/</code> + <code style="color:var(--accent)">G</code> jump-to-end</li>
           <li>list items now ellipsize correctly at small widths</li>
         </ul>
@@ -1003,7 +950,6 @@
           <div class="change-date">last month</div>
         </div>
         <ul class="change-items">
-          <li>command palette (⌘K)</li>
           <li>fuzzy search</li>
           <li>keyboard cheatsheet (?)</li>
         </ul>
@@ -1122,13 +1068,11 @@
 
   // initial notes (the ones present before the demo "creates" one)
   const initialNotes = [
-    { title: 'lake atitlan tech meets', meta: '09:33 AM | #travel', body: 'meet at the dock at 0830.\nbring sunscreen and a laptop.\n\n[ ] confirm rsvp count\n[ ] book the boat' },
-    { title: 'AI driven SDLC', meta: '08:16 AM | my current developme...', body: 'my current development workflow is:\n\n1. spec → claude\n2. claude → code\n3. me → review\n\n#work' },
-    { title: 'linked in', meta: '07:33 AM | http://linkedin.com/...', body: 'profile updates pending.\n#admin' },
-    { title: 'kelly\'s vulnerability thing', meta: 'Wed | needs follow-up', body: 'follow up on the security advisory.\n\n#work' },
-    { title: 'my wise tag', meta: 'Tue | https://wise.com/pay...', body: 'wise.com/pay/me/...' },
-    { title: 'we are creating a landing...', meta: 'May 22 | — courageous dreamers,...', body: 'pitch deck draft v3.\n\n#hustling' },
-    { title: 'robert gold', meta: 'May 17 | https://guatemalachron...', body: '#contacts' },
+    { title: 'Voice assistant task creation', meta: '09:33 AM | #proj-todude', body: 'Voice assistant task creation\n#proj-todude' },
+    { title: 'Essentia + TensorFlow scoring', meta: '07:33 AM | #proj-lickdude', body: 'Essentia + TensorFlow scoring\n#proj-lickdude' },
+    { title: 'Teensy 4.1/Audio Shield integration', meta: '07:33 AM | #proj-kickdude', body: 'Teensy 4.1/Audio Shield integration\n#proj-kickdude' },
+    { title: 'Local cajon artisan', meta: '07:33 AM | #proj-lildude', body: 'Local cajon artisan\n#proj-lildude' },
+    { title: 'lake atitlan tech meet', meta: '09:33 AM | #proj-techmeet', body: 'meet at the dock at 0830.\nbring sunscreen and a laptop.\n\n[ ] confirm rsvp count\n[ ] book the boat' },
     { title: 'greetings', meta: 'May 15 | press ? for keyboard s...', body: 'welcome note.' }
   ];
 
@@ -1189,12 +1133,14 @@
     }
   }
 
-  async function typeSearch(text, delay = 60) {
+  async function typeSearch(text, delay = 60, notes) {
     searchPlaceholder.style.display = 'none';
+    searchCursor.classList.remove('hidden');
     let current = '';
     for (let i = 0; i < text.length; i++) {
       current += text[i];
       searchText.textContent = current;
+      if (notes) renderList(notes, current);
       await sleep(delay + Math.random() * 40);
     }
   }
@@ -1202,6 +1148,7 @@
   async function clearSearch() {
     searchText.textContent = '';
     searchPlaceholder.style.display = '';
+    searchCursor.classList.add('hidden');
   }
 
   async function runDemo() {
@@ -1209,38 +1156,48 @@
       // ── reset
       const notes = JSON.parse(JSON.stringify(initialNotes));
       renderList(notes, null);
+      titleEl.style.display = '';
       titleEl.innerHTML = '';
-      bodyEl.innerHTML = '<span style="color:var(--fg-dimmer)">no note selected — press ⌘N to start.</span>';
+      bodyEl.innerHTML = '';
       await clearSearch();
       hideKey();
       await sleep(1400);
 
+      // ── hint: create shortcut
+      showKey('⌘ create');
+      await sleep(1000);
+      hideKey();
+      await sleep(400);
+
       // ── press ⌘N
       showKey('⌘N · new note');
       await sleep(700);
-      // insert new note at top, selected
-      notes.unshift({ title: 'New Note', meta: '10:27 AM | No Content', body: '', selected: true });
-      // deselect others
+      notes.unshift({ title: 'New Note', meta: '09:35 PM | No Content', body: '', selected: true });
       notes.forEach((n, i) => { if (i !== 0) n.selected = false; });
       renderList(notes, null);
-      titleEl.innerHTML = '<span style="color:var(--fg-dimmer)">untitled</span>';
+      titleEl.style.display = '';
+      titleEl.innerHTML = '';
       bodyEl.innerHTML = '';
       await sleep(500);
       hideKey();
       await sleep(300);
 
-      // ── type title
-      await typeInto(titleEl, 'lunch w/ sam', 70);
-      // reflect in list
-      notes[0].title = 'lunch w/ sam';
-      notes[0].meta = '10:27 AM | No Content';
-      renderList(notes, null);
-      await sleep(400);
-
-      // ── type body
-      const body = "- try the new dosa place on 16th\n- bring the laptop, not the ipad\n- ask about the conf talk\n#personal";
-      await typeInto(bodyEl, body, 32, { html: true });
-      notes[0].meta = '10:28 AM | #personal';
+      // ── type body with live title update
+      const body = "test MCP integration with Claude Code\n#proj-notedude";
+      let current = '';
+      for (let i = 0; i < body.length; i++) {
+        current += body[i];
+        bodyEl.innerHTML = tagify(renderTodos(current)) + '<span class="typing-cursor"></span>';
+        // extract first line for title
+        const firstLine = current.split('\n')[0];
+        notes[0].title = firstLine || 'New Note';
+        notes[0].body = current;
+        renderList(notes, null);
+        await sleep(32 + Math.random() * 30);
+      }
+      bodyEl.innerHTML = tagify(renderTodos(body));
+      notes[0].body = body;
+      notes[0].meta = '09:35 PM | #proj-notedude';
       renderList(notes, null);
       await sleep(900);
 
@@ -1249,11 +1206,8 @@
       await sleep(700);
       hideKey();
 
-      // ── type #personal in search
-      await typeSearch('#personal', 70);
-      await sleep(400);
-      // filter list
-      renderList(notes, '#personal');
+      // ── type #proj-notedude in search
+      await typeSearch('#proj-notedude', 70, notes);
       await sleep(1800);
 
       // ── press Esc
@@ -1263,12 +1217,6 @@
       await clearSearch();
       renderList(notes, null);
       await sleep(1200);
-
-      // ── press ⌘K — show fake palette flash
-      showKey('⌘K · command palette');
-      await sleep(1100);
-      hideKey();
-      await sleep(800);
     }
   }
 
