@@ -721,7 +721,7 @@
     <div class="topbar-brand">
       <span class="prompt">&gt;</span>
       <span>note_dude</span>
-      <span class="ver">v0.1.7</span>
+      <span class="ver">v0.5.0</span>
     </div>
     <nav class="topbar-nav">
       <a href="#keys">keys</a>
@@ -901,7 +901,6 @@
         <span>last edited: a tuesday</span>
       </div>
       <p>we are not entirely sure. we were frustrated by lack of keyboard support and responsiveness of existing apps. there are also so cool new features like tag-pinning*  .</p>
-      <p>see you on the home row.</p>
       <div class="founder-sig">— <span class="name">the dude</span> · <span style="color:var(--accent)">$</span> whoami: a person with too many notes</div>
     </div>
   </div>
@@ -915,55 +914,61 @@
     <div class="changelog">
       <div class="change">
         <div class="change-meta">
-          <div class="change-version">v0.4.2</div>
-          <div class="change-date">today</div>
+          <div class="change-version">v0.5.0</div>
+          <div class="change-date">Jun 1, 2026</div>
         </div>
         <ul class="change-items">
-          <li>add <code style="color:var(--accent)">1</code> / <code style="color:var(--accent)">9</code> jump to first / last note</li>
-          <li>list items now ellipsize correctly at small widths</li>
-        </ul>
-      </div>
-      <div class="change">
-        <div class="change-meta">
-          <div class="change-version">v0.4.1</div>
-          <div class="change-date">3 days ago</div>
-        </div>
-        <ul class="change-items">
-          <li>markdown checkboxes — <code style="color:var(--accent)">[ ]</code> renders as a real toggle</li>
-          <li>tag autocomplete on <code style="color:var(--accent)">#</code></li>
-          <li class="fix">date headers no longer say "Invalid Date" on tuesdays</li>
+          <li>recently-searched tags now sort newest-first in suggestions <span style="color:var(--fg-dimmer)">#66</span></li>
+          <li class="fix">typing a shortcut key in search no longer fires the shortcut <span style="color:var(--fg-dimmer)">#65</span></li>
+          <li>archived notes are now visually separated in the list <span style="color:var(--fg-dimmer)">#49</span></li>
         </ul>
       </div>
       <div class="change">
         <div class="change-meta">
           <div class="change-version">v0.4.0</div>
-          <div class="change-date">last week</div>
+          <div class="change-date">May 31, 2026</div>
         </div>
         <ul class="change-items">
-          <li>tags overhaul: nested tags (<code style="color:var(--accent)">#work/standup</code>)</li>
-          <li>library filter by tag from search</li>
-          <li class="rm">removed: the &quot;folders&quot; concept (rip)</li>
+          <li><code style="color:var(--accent)">t → m</code> move a note into any task list <span style="color:var(--fg-dimmer)">#62</span></li>
+          <li><code style="color:var(--accent)">r → r</code> report-an-issue shortcut <span style="color:var(--fg-dimmer)">#53</span></li>
         </ul>
       </div>
       <div class="change">
         <div class="change-meta">
           <div class="change-version">v0.3.0</div>
-          <div class="change-date">3 weeks ago</div>
+          <div class="change-date">May 30, 2026</div>
         </div>
         <ul class="change-items">
-          <li>vim-style navigation (<code style="color:var(--accent)">j k</code>)</li>
-          <li>pinned notes (<code style="color:var(--accent)">p</code>)</li>
-          <li>local-first storage; export to .md</li>
+          <li>pin and tag-pin are now independent (<code style="color:var(--accent)">⇧P</code>) <span style="color:var(--fg-dimmer)">#60</span></li>
+          <li>note row flashes on save <span style="color:var(--fg-dimmer)">#58</span></li>
+          <li><code style="color:var(--accent)">⌘[</code> / <code style="color:var(--accent)">⌘]</code> go back / forward through visited notes <span style="color:var(--fg-dimmer)">#40</span></li>
+          <li class="fix">archiving from search no longer jumps to the wrong note <span style="color:var(--fg-dimmer)">#50</span></li>
         </ul>
       </div>
       <div class="change">
         <div class="change-meta">
           <div class="change-version">v0.2.0</div>
-          <div class="change-date">last month</div>
+          <div class="change-date">May 9, 2026</div>
         </div>
         <ul class="change-items">
-          <li>fuzzy search</li>
-          <li>keyboard cheatsheet (?)</li>
+          <li>clickable links in note content <span style="color:var(--fg-dimmer)">#47</span></li>
+          <li>smart relative timestamps in the note list <span style="color:var(--fg-dimmer)">#44</span></li>
+          <li>paste works everywhere, preserving lists <span style="color:var(--fg-dimmer)">#42</span></li>
+          <li>demo mode — try it with no login <span style="color:var(--fg-dimmer)">#36</span></li>
+          <li class="fix">empty notes are discarded on Escape <span style="color:var(--fg-dimmer)">#45</span></li>
+        </ul>
+      </div>
+      <div class="change">
+        <div class="change-meta">
+          <div class="change-version">v0.1.0</div>
+          <div class="change-date">May 6, 2026</div>
+        </div>
+        <ul class="change-items">
+          <li>MCP server — drive your notes from Claude <span style="color:var(--fg-dimmer)">#30</span></li>
+          <li>pinned notes, including tag-pinning <span style="color:var(--fg-dimmer)">#13</span></li>
+          <li>dark mode (<code style="color:var(--accent)">d → m</code>) <span style="color:var(--fg-dimmer)">#10</span></li>
+          <li>task-list shortcuts (<code style="color:var(--accent)">t → i/t/n/l</code>) <span style="color:var(--fg-dimmer)">#6</span></li>
+          <li><code style="color:var(--accent)">?</code> keyboard-shortcut overlay <span style="color:var(--fg-dimmer)">#20</span></li>
         </ul>
       </div>
     </div>
