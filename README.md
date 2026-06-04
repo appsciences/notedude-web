@@ -29,7 +29,7 @@ Order of sections, top to bottom:
 ### 1. Top bar
 - Sticky, `position: sticky; top: 0`, z-index 50. Background `rgba(10,10,10,0.85)` with `backdrop-filter: blur(8px)`. Bottom border `1px solid --border`.
 - Inner: flex space-between, 14px/28px padding, max 980px centered, font-size 13px.
-- **Left (brand):** `>` in accent purple, then `note_dude` in bright fg (weight 500), then `v0.4.2` in dim fg.
+- **Left (brand):** `>` in accent purple, then `note_dude` in bright fg (weight 500), then the version in dim fg (mirrors the newest changelog entry — currently `v0.5.0`).
 - **Right (nav):** text links `features`, `keys`, `changelog`, `faq`, `donate` in `--fg-dim`, hover → `--fg-bright`. Then a CTA button **`open app →`** linking to `https://app.notedude.app`: 7px/14px padding, `1px solid --accent` border, text `--accent-bright`, bg `rgba(141,138,212,0.06)`, radius 2px. Hover → solid `--accent` bg with `#0a0a0a` text; the `→` arrow translates +2px on hover.
 - Nav hidden below 720px (brand + CTA remain).
 
@@ -84,7 +84,7 @@ A faux app window that auto-plays a looping animation demonstrating note creatio
 - Each entry: grid `130px 1fr`, 24px gap, 14px/0 padding, bottom border `--border`.
   - Left: version (accent, weight 500) + date (12px dim).
   - Right: bulleted list, no markers; custom prefixes via `::before`: additions `+ ` in `--ok` green, fixes (`.fix`) `~ ` in `--warn` amber, removals (`.rm`) `- ` in `--err` red. Inline `code` in accent.
-- 5 entries: v0.4.2 (today), v0.4.1 (3 days ago), v0.4.0 (last week), v0.3.0 (3 weeks ago), v0.2.0 (last month). See HTML for exact bullet copy.
+- 5 entries derived from real closed, user-facing issues in the app repo (`appsciences/notedude2`), grouped by close-date into releases v0.5.0 (Jun 1 2026) → v0.1.0 (May 6 2026), newest first. Each bullet trails a dim `#NN` issue ref. Internal chores/tests/security issues excluded. The top-bar version chip mirrors the newest entry (v0.5.0). See HTML for exact bullet copy.
 
 ### 8. FAQ (`#faq`)
 - Label `## faq`, title "man note_dude".
@@ -198,7 +198,7 @@ selection: background --accent-bg, color --fg-bright
 ## Placeholders to replace before shipping
 - Donate provider URLs: `github.com/sponsors/notedude`, `buymeacoffee.com/notedude`, `paypal.me/notedude` — confirm real handles.
 - Crypto addresses (BTC `bc1q…`, ETH `0x…`) are fake — replace with real wallet addresses.
-- Email `hi@notedude.app`, github `github.com/notedude`, version `v0.4.2`, and changelog dates/copy.
+- Email `hi@notedude.app`, github `github.com/notedude`, version `v0.5.0` (kept in sync with the newest changelog entry), and changelog dates/copy.
 
 ## Files
 - `notedude Landing.html` — the complete single-file prototype (HTML + CSS in a `<style>` block + vanilla JS in `<script>` blocks). Everything described above lives here; use it as the source of truth for exact copy and values.
