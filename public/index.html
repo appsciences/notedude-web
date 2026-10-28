@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>note_dude — keyboard-first notes</title>
+<meta name="description" content="Fast, keyboard-first notes with Markdown, tag-pinning, task lists and room for your next idea." />
+<link rel="icon" type="image/svg+xml" href="/notedude-n_d-icon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -711,6 +713,15 @@
     .change { grid-template-columns: 1fr; gap: 4px; }
     .topbar-nav { display: none; }
   }
+.status { display:block; color:var(--warn); font-size:11px; margin-bottom:8px; }
+.demo-controls {display:flex;gap:16px;justify-content:space-between;align-items:center;margin-top:12px;color:var(--fg-dim);font-size:12px;min-height:60px}
+.demo-controls p {max-width:65ch}
+.demo-controls button {font:inherit;color:var(--accent-bright);background:var(--bg-2);border:1px solid var(--border-bright);padding:6px 10px;cursor:pointer;white-space:nowrap}
+.demo-controls>div {display:flex;gap:8px}
+a:focus-visible,button:focus-visible {outline:2px solid var(--accent);outline-offset:4px}
+.demo-detail-body code {color:var(--accent-bright)}
+@media(max-width:720px){.hero-ascii{font-size:30px}.demo-controls{align-items:flex-start;flex-direction:column}.demo-detail{padding-left:12px;padding-right:12px}.demo-detail-body{font-size:11px}.demo-frame{height:460px}.key-indicator{font-size:10px;bottom:8px;right:8px}.container{padding:0 18px}.demo-note{padding-left:10px;padding-right:10px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -721,11 +732,11 @@
     <div class="topbar-brand">
       <span class="prompt">&gt;</span>
       <span>note_dude</span>
-      <span class="ver">v0.5.0</span>
+      <span class="ver">notes → action</span>
     </div>
     <nav class="topbar-nav">
       <a href="#keys">keys</a>
-      <a href="#changelog">changelog</a>
+      <a href="#blog">journal</a>
       <a href="#faq">faq</a>
       <a href="#donate">donate</a>
       <a href="mailto:hi202606@notedude.app">contact</a>
@@ -752,7 +763,7 @@
       <span class="dot">·</span>
       <span>best of google keep and apple notes</span>
       <span class="dot">·</span>
-      <span>0 ads, 0 trackers</span>
+      <span>plain text, fewer distractions</span>
     </div>
   </header>
 
@@ -781,6 +792,7 @@
       </div>
       <div class="key-indicator" id="key-indicator"></div>
     </div>
+    <div class="demo-controls"><p id="demo-caption"></p><div><button id="demo-toggle" type="button">pause demo</button> <button id="demo-next" type="button">next →</button></div></div>
   </div>
 </div>
 
@@ -789,127 +801,20 @@
   <div class="container">
     <div class="section-label"><span class="hash">##</span> reference</div>
     <div class="section-title">keyboard map. that is all you need.</div>
-    <div class="cheatsheet">
-      <div class="cheat-section">
-        <div class="cheat-section-head">navigation</div>
-        <div class="cheat-rows">
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">/</span></div>
-            <div class="cheat-desc">focus search</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">j</span> <span class="key plus">/</span> <span class="key">k</span></div>
-            <div class="cheat-desc">next / previous note</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">1</span> <span class="key plus">–</span> <span class="key">9</span></div>
-            <div class="cheat-desc">jump to note by position</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">⌘</span><span class="key">[</span> <span class="key plus">/</span> <span class="key">⌘</span><span class="key">]</span></div>
-            <div class="cheat-desc">back / forward through history</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">Esc</span></div>
-            <div class="cheat-desc">leave search</div>
-          </div>
-        </div>
-      </div>
-      <div class="cheat-section">
-        <div class="cheat-section-head">editing</div>
-        <div class="cheat-rows">
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">c</span></div>
-            <div class="cheat-desc">new note</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">⏎</span> <span class="key plus">/</span> <span class="key">e</span></div>
-            <div class="cheat-desc">edit selected note</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">Esc</span> <span class="key plus">/</span> <span class="key">⌘</span><span class="key">⏎</span></div>
-            <div class="cheat-desc">save &amp; exit editing</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">p</span></div>
-            <div class="cheat-desc">pin / unpin note</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">⇧</span><span class="key plus">+</span><span class="key">P</span></div>
-            <div class="cheat-desc">tag-pin note (top of matching search)</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">⇧</span><span class="key plus">+</span><span class="key">Y</span></div>
-            <div class="cheat-desc">archive note (tags #archived)</div>
-          </div>
-        </div>
-      </div>
-      <div class="cheat-section">
-        <div class="cheat-section-head">tags &amp; filters</div>
-        <div class="cheat-rows">
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">#</span></div>
-            <div class="cheat-desc">start a tag (autocomplete kicks in)</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">t</span> <span class="key plus">→</span> <span class="key">i</span> <span class="key">t</span> <span class="key">n</span> <span class="key">l</span> <span class="key">d</span></div>
-            <div class="cheat-desc">jump to task list · inbox / today / near-term / long-term / done</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">t</span> <span class="key plus">→</span> <span class="key">m</span></div>
-            <div class="cheat-desc">move note to a task list</div>
-          </div>
-        </div>
-      </div>
-      <div class="cheat-section">
-        <div class="cheat-section-head">app</div>
-        <div class="cheat-rows">
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">d</span> <span class="key plus">→</span> <span class="key">m</span></div>
-            <div class="cheat-desc">toggle dark mode</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">d</span> <span class="key plus">→</span> <span class="key">d</span></div>
-            <div class="cheat-desc">open donate page</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">r</span> <span class="key plus">→</span> <span class="key">r</span></div>
-            <div class="cheat-desc">report an issue</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">l</span> <span class="key plus">→</span> <span class="key">l</span></div>
-            <div class="cheat-desc">log out</div>
-          </div>
-          <div class="cheat-row">
-            <div class="cheat-keys"><span class="key">?</span></div>
-            <div class="cheat-desc">show this cheatsheet, anywhere</div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="cheatsheet"><div class="cheat-section"><div class="cheat-section-head">navigation</div><div class="cheat-rows"><div class="cheat-row"><div class="cheat-keys"><kbd class="key">j / ↓</kbd></div><div class="cheat-desc">next note</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">k / ↑</kbd></div><div class="cheat-desc">previous note</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">1 – 9</kbd></div><div class="cheat-desc">jump to note by position</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⌘[ / ⌘]</kbd></div><div class="cheat-desc">navigate back / forward in history</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">c</kbd></div><div class="cheat-desc">create new note (inherits tags from the active search)</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Shift+C</kbd></div><div class="cheat-desc">create new note, clearing the active search</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">e / i</kbd></div><div class="cheat-desc">edit selected note</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Esc / ⌘⏎</kbd></div><div class="cheat-desc">save and exit editing</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Tab</kbd></div><div class="cheat-desc">insert a tab character while editing (indents on a list line)</div></div></div></div><div class="cheat-section"><div class="cheat-section-head">search</div><div class="cheat-rows"><div class="cheat-row"><div class="cheat-keys"><kbd class="key">/</kbd></div><div class="cheat-desc">open search</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⏎</kbd></div><div class="cheat-desc">apply search filter</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Esc</kbd></div><div class="cheat-desc">apply filter and exit search</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Esc Esc</kbd></div><div class="cheat-desc">clear filter</div></div></div></div><div class="cheat-section"><div class="cheat-section-head">formatting (while editing)</div><div class="cheat-rows"><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⇧⌘T</kbd></div><div class="cheat-desc">title</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⇧⌘H</kbd></div><div class="cheat-desc">heading</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⇧⌘J</kbd></div><div class="cheat-desc">subheading</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⇧⌘B</kbd></div><div class="cheat-desc">body — removes heading or list</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⇧⌘7</kbd></div><div class="cheat-desc">bulleted list</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⇧⌘8</kbd></div><div class="cheat-desc">dashed list</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⇧⌘9</kbd></div><div class="cheat-desc">numbered list</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⇥ / ⇧⇥</kbd></div><div class="cheat-desc">indent / outdent a list item</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⏎</kbd></div><div class="cheat-desc">continue the list; again on an empty item ends it</div></div></div></div><div class="cheat-section"><div class="cheat-section-head">markdown</div><div class="cheat-rows"><div class="cheat-row"><div class="cheat-keys"><kbd class="key">m / ⇧⌘M</kbd></div><div class="cheat-desc">show raw Markdown (read-only); again to render</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">**b** *i* ~~s~~ `c`</kbd></div><div class="cheat-desc">bold, italic, strike, code (premium)</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">[text](url)</kbd></div><div class="cheat-desc">link (premium)</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">``` &gt; --- - [ ]</kbd></div><div class="cheat-desc">code block, quote, rule, task (premium)</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">| a | b |</kbd></div><div class="cheat-desc">table, with a |---|---| row (premium)</div></div></div></div><div class="cheat-section"><div class="cheat-section-head">pinning</div><div class="cheat-rows"><div class="cheat-row"><div class="cheat-keys"><kbd class="key">p</kbd></div><div class="cheat-desc">pin note to top (idle mode)</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Shift+P</kbd></div><div class="cheat-desc">tag-pin note (top of search results when first tag matches)</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">○</kbd></div><div class="cheat-desc">indicator: pinned</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">#</kbd></div><div class="cheat-desc">indicator: tag-pinned (first tag matches active search)</div></div></div></div><div class="cheat-section"><div class="cheat-section-head">to_dude</div><div class="cheat-rows"><div class="cheat-row"><div class="cheat-keys"><kbd class="key">t → i</kbd></div><div class="cheat-desc">#tasks-inbox</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">t → t</kbd></div><div class="cheat-desc">#tasks-today</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">t → n</kbd></div><div class="cheat-desc">#tasks-nearterm</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">t → l</kbd></div><div class="cheat-desc">#tasks-longterm</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">t → d</kbd></div><div class="cheat-desc">#tasks-done</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">t → m</kbd></div><div class="cheat-desc">move note to a task list (incl. done)</div></div></div></div><div class="cheat-section"><div class="cheat-section-head">etc</div><div class="cheat-rows"><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⇧⌫</kbd></div><div class="cheat-desc">on a highlighted tag: delete / rename / merge it everywhere</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⌘C</kbd></div><div class="cheat-desc">copy note to clipboard (with text selected, copies the selection)</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Shift+Y</kbd></div><div class="cheat-desc">archive note (tags #archived, moves to end of list); on an archived note, unarchive</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">d → d</kbd></div><div class="cheat-desc">permanently delete note (asks to confirm)</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">z</kbd></div><div class="cheat-desc">undo — text edits too (archive / unarchive / delete / pin / task move / typing)</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Shift+Z</kbd></div><div class="cheat-desc">redo last undone action</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Shift+E</kbd></div><div class="cheat-desc">export all notes to a backup file</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Shift+I</kbd></div><div class="cheat-desc">import notes from a backup file</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">d → m</kbd></div><div class="cheat-desc">toggle dark mode</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">Shift+D</kbd></div><div class="cheat-desc">open donate page</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">r → r</kbd></div><div class="cheat-desc">report an issue</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">l → l</kbd></div><div class="cheat-desc">log out</div></div><div class="cheat-row"><div class="cheat-keys"><kbd class="key">⌘/ or ?</kbd></div><div class="cheat-desc">show this (⌘/ works from any mode)</div></div></div></div></div><p class="feature-desc" style="margin-top:16px">Single-letter commands work in idle mode. ⌘ means Command on Mac, Ctrl on Windows/Linux. Markdown rendering is currently enabled for everyone while billing is being developed. <a href="https://github.com/appsciences/notedude2/blob/main/src/components/App.tsx">App keyboard reference ↗</a></p>
   </div>
 </section>
 
 <!-- ─────────── FOUNDER NOTE ─────────── -->
-<section id="why">
-  <div class="container">
-    <div class="section-label"><span class="hash">##</span> why</div>
-    <div class="section-title">why this exists.</div>
-    <div class="founder">
-      <div class="founder-head">
-        <span style="color:var(--fg-dimmer)">|</span>
-        <span>last edited: a tuesday</span>
-      </div>
-      <p>we are not entirely sure. we were frustrated by lack of keyboard support and responsiveness of existing apps. there are also so cool new features like tag-pinning and back/forth history navigation and MCP server. Markdown support, mobile app are coming.  .</p>
-    </div>
-  </div>
-</section>
+<section id="why"><div class="container"><div class="section-label"><span class="hash">##</span> why</div><h2 class="section-title">why this exists.</h2><div class="founder"><p>we wanted a place to put a thought before it disappears. fast enough for a keyboard, flexible enough for messy notes, and useful after the capture is over.</p><p>so we’re building from a small core: plain text, tags, and very little ceremony. some of the fun is already here. some is still on the drawing board.</p></div><div class="feature-grid" style="margin-top:24px"><article class="feature"><div class="feature-head"><span class="feature-num">01</span><h3 class="feature-name">write at the speed you think</h3></div><p class="feature-desc">Vim-style navigation, deliberate <code>e / i</code> editing, back/forward history, and Markdown that stays plain text. Headings, lists, code, tables, and a raw-source toggle are here.</p></article><article class="feature"><div class="feature-head"><span class="feature-num">02</span><h3 class="feature-name">a home for every client and project</h3></div><p class="feature-desc">Tags replace folders. Tag-pin the client’s standing brief above project notes when its first tag matches your search. Rename, merge, or remove a tag across notes without hand-editing each one.</p></article><article class="feature"><div class="feature-head"><span class="feature-num">03</span><h3 class="feature-name">notes that become next actions</h3></div><p class="feature-desc"><a href="http://todude.org">to_dude ↗</a> is the task-focused side of the idea: capture, decide what matters today, and move the rest to near-term, long-term, or done. NoteDude already has these <code>#tasks-*</code> lists and keyboard moves; the dedicated to_dude build is <a href="https://github.com/appsciences/notedude2/issues/151">coming soon</a>.</p></article><article class="feature"><div class="feature-head"><span class="feature-num">04</span><h3 class="feature-name">bring your assistant</h3></div><p class="feature-desc">The MCP server lets an assistant work with notes. The next step is a familiar NoteDude surface inside a Claude Artifact or ChatGPT Site, so the conversation and the notes can sit together. Those embedded experiences are coming soon; the standalone app is available today.</p></article><article class="feature"><div class="feature-head"><span class="feature-num">05</span><h3 class="feature-name">mobile capture that lets you finish</h3></div><p class="feature-desc"><span class="status">coming soon</span> Record the audio and keep the transcription. A real stop button ends the recording when you decide you’re done—pauses should never interrupt a thought. That’s the direction for our <a href="https://github.com/appsciences/notedude2/issues/251">mobile voice-capture client</a>, alongside the mobile web and share-capture work.</p></article><article class="feature"><div class="feature-head"><span class="feature-num">06</span><h3 class="feature-name">Genius tags: small label, big follow-through</h3></div><p class="feature-desc"><span class="status">coming soon · concept</span> Tags that kick off workflows: route a captured idea, start a follow-up, or hand a note to an assistant. Ordinary tags organize your notes today; Genius tags are our idea for making them act.</p></article></div></div></section>
 
+<section id="coming-soon"><div class="container"><div class="section-label"><span class="hash">##</span> coming soon</div><h2 class="section-title">the workbench.</h2><p class="donate-intro">Ideas from the backlog, at different stages of discovery. No promised ship dates. Mobile voice capture and Genius tags above belong here too.</p><div class="feature-grid"><article class="feature"><h3 class="feature-name">a browsable tag library</h3><p class="feature-desc">See your tags together, with counts and rename/delete actions. <a href="https://github.com/appsciences/notedude2/issues/243">follow #243 ↗</a></p></article><article class="feature"><h3 class="feature-name">merge notes by tag</h3><p class="feature-desc">Gather a project’s scattered notes into one document. <a href="https://github.com/appsciences/notedude2/issues/242">follow #242 ↗</a></p></article><article class="feature"><h3 class="feature-name">images in notes</h3><p class="feature-desc">Paste media alongside the text. <a href="https://github.com/appsciences/notedude2/issues/244">follow #244 ↗</a></p></article><article class="feature"><h3 class="feature-name">your own tag shortcuts</h3><p class="feature-desc">Bind a favorite project or workflow to your own keys. <a href="https://github.com/appsciences/notedude2/issues/248">follow #248 ↗</a></p></article><article class="feature"><h3 class="feature-name">inline formatting shortcuts</h3><p class="feature-desc">More keyboard tools for bold, italic, code, and links. <a href="https://github.com/appsciences/notedude2/issues/33">follow #33 ↗</a></p></article><article class="feature"><h3 class="feature-name">Google Tasks sync</h3><p class="feature-desc">The sync rules are in; two-way connection and orchestration are still ahead. <a href="https://github.com/appsciences/notedude2/issues/138">follow #138 ↗</a></p></article><article class="feature"><h3 class="feature-name">Claude Artifact + ChatGPT Site</h3><p class="feature-desc">Bring the notes surface into the assistant workspace. Claude auth, storage, and keyboard focus still need work. <a href="https://github.com/appsciences/notedude2/issues/201">follow #201 ↗</a></p></article></div></div></section>
 <!-- ─────────── CHANGELOG ─────────── -->
+<section id="blog"><div class="container"><div class="section-label"><span class="hash">##</span> journal</div><h2 class="section-title">small releases. useful changes.</h2><div class="feature-grid"><article class="feature"><time class="section-label" datetime="2026-10-22">2026-10-22</time><h3 class="feature-name"><a href="/blog/notes-find-their-way-back.html">the note you just touched comes back to the top.</a></h3><p class="feature-desc">A small sorting change makes a busy notebook feel much less forgetful.</p></article><article class="feature"><time class="section-label" datetime="2026-10-11">2026-10-11</time><h3 class="feature-name"><a href="/blog/markdown-backups-and-better-keys.html">plain text grew a few superpowers.</a></h3><p class="feature-desc">Full Markdown rendering, portable backups, and a more deliberate keyboard map.</p></article><article class="feature"><time class="section-label" datetime="2026-10-03">2026-10-03</time><h3 class="feature-name"><a href="/blog/know-when-your-notes-are-safe.html">less guessing about saves. fewer accidental edits.</a></h3><p class="feature-desc">The app now tells you more about what it’s doing while getting out of your way.</p></article><article class="feature"><time class="section-label" datetime="2026-08-03">2026-08-03</time><h3 class="feature-name"><a href="/blog/tags-with-context.html">one client brief. a dozen project notes.</a></h3><p class="feature-desc">Tag-pinning and task moves make a small notebook useful for work that spreads across projects.</p></article></div><p class="feature-desc" style="margin-top:16px">Release notes below follow merged app changes; journal dates reflect the relevant merge dates.</p></div></section>
 <section id="changelog">
   <div class="container">
     <div class="section-label"><span class="hash">##</span> changelog</div>
-    <div class="changelog">
+    <h2 class="section-title">what shipped.</h2><div class="changelog"><div class="change"><div class="change-meta"><div class="change-version">app update</div><time class="change-date" datetime="2026-10-22">2026-10-22</time></div><ul class="change-items"><li><a href="/blog/notes-find-their-way-back.html">the note you just touched comes back to the top.</a></li><li>A small sorting change makes a busy notebook feel much less forgetful.</li></ul></div><div class="change"><div class="change-meta"><div class="change-version">app update</div><time class="change-date" datetime="2026-10-11">2026-10-11</time></div><ul class="change-items"><li><a href="/blog/markdown-backups-and-better-keys.html">plain text grew a few superpowers.</a></li><li>Full Markdown rendering, portable backups, and a more deliberate keyboard map.</li></ul></div><div class="change"><div class="change-meta"><div class="change-version">app update</div><time class="change-date" datetime="2026-10-03">2026-10-03</time></div><ul class="change-items"><li><a href="/blog/know-when-your-notes-are-safe.html">less guessing about saves. fewer accidental edits.</a></li><li>The app now tells you more about what it’s doing while getting out of your way.</li></ul></div><div class="change"><div class="change-meta"><div class="change-version">app update</div><time class="change-date" datetime="2026-08-03">2026-08-03</time></div><ul class="change-items"><li><a href="/blog/tags-with-context.html">one client brief. a dozen project notes.</a></li><li>Tag-pinning and task moves make a small notebook useful for work that spreads across projects.</li></ul></div>
       <div class="change">
         <div class="change-meta">
           <div class="change-version">v0.5.0</div>
@@ -974,17 +879,7 @@
 </section>
 
 <!-- ─────────── FAQ ─────────── -->
-<section id="faq">
-  <div class="container">
-    <div class="section-label"><span class="hash">##</span> faq</div>
-    <div class="faq">
-      <div class="faq-item">
-        <div class="faq-q"><span class="q">&gt;</span> is there an MCP Server?</div>
-        <div class="faq-a">of course.</div>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="faq"><div class="container"><div class="section-label"><span class="hash">##</span> faq</div><h2 class="section-title">good questions.</h2><div class="faq"><div class="faq-item"><h3 class="faq-q"><span class="q">&gt;</span>what’s the difference between pinning and tag-pinning?</h3><p class="faq-a">Pinning keeps a note at the top of your library. Tag-pinning makes a note rise to the top of a matching tag search when its first tag matches. Think: a client brief above that client’s project notes.</p></div><div class="faq-item"><h3 class="faq-q"><span class="q">&gt;</span>is this Vim in a browser?</h3><p class="faq-a">It borrows the good bits: j/k to browse, i or e to edit, and a visible INSERT mode. It isn’t a full Vim editor. Enter applies a search; Esc saves and leaves editing. Full Vi modes are still an idea in the backlog.</p></div><div class="faq-item"><h3 class="faq-q"><span class="q">&gt;</span>can I get my notes out?</h3><p class="faq-a">Yes. Shift+E exports all notes as a versioned JSON backup; Shift+I imports one. Keep backups somewhere you control. Markdown lives in the note text, so the source stays readable.</p></div><div class="faq-item"><h3 class="faq-q"><span class="q">&gt;</span>did that change really save?</h3><p class="faq-a">The app shows unsynced and failed-write states, keeps unsynced edits on the device, and warns before closing while writes remain. Check the save status before switching devices; a local pending edit is not yet a cloud backup.</p></div><div class="faq-item"><h3 class="faq-q"><span class="q">&gt;</span>can I undo an accidental archive or delete?</h3><p class="faq-a">In idle mode, z undoes note actions and ordinary saved text edits; Shift+Z redoes them. dd asks before permanent deletion. Recovery history is session-only, so don’t treat undo as a backup after reloading.</p></div><div class="faq-item"><h3 class="faq-q"><span class="q">&gt;</span>will voice capture stop when I pause?</h3><p class="faq-a">The planned mobile recorder is designed to wait for your Stop button, keep the audio, and produce a transcript. That dedicated capture experience is coming soon; it is not a recording feature in the current web app.</p></div><div class="faq-item"><h3 class="faq-q"><span class="q">&gt;</span>what’s available now, and what’s still an idea?</h3><p class="faq-a">Markdown rendering, task-list tags, tag-pinning, JSON backups, and the MCP server are in the codebase. Mobile recording, Genius tag workflows, and embedded assistant experiences are still planned. The workbench above links to the backlog.</p></div></div></div></section>
 
 <!-- ─────────── DONATE ─────────── -->
 <section id="donate" class="donate">
@@ -1047,7 +942,7 @@
       <div class="footer-links">
         <a href="https://app.notedude.app">app</a>
         <a href="#changelog">changelog</a>
-        <a href="https://github.com/notedude">github</a>
+        <a href="https://github.com/appsciences/notedude2">github</a>
         <a href="mailto:hi202606@notedude.app">contact</a>
       </div>
     </div>
@@ -1057,193 +952,45 @@
 <script>
 // ─────────── DEMO ANIMATION ───────────
 (function(){
-  const searchText = document.getElementById('search-text');
-  const searchPlaceholder = document.getElementById('search-placeholder');
-  const searchCursor = document.getElementById('search-cursor');
-  const listEl = document.getElementById('demo-list');
-  const titleEl = document.getElementById('detail-title');
-  const bodyEl = document.getElementById('detail-body');
-  const keyIndicator = document.getElementById('key-indicator');
-
-  // initial notes (the ones present before the demo "creates" one)
-  const initialNotes = [
-    { title: 'Voice assistant task creation', meta: '09:33 AM | #proj-todude', body: 'Voice assistant task creation\n#proj-todude' },
-    { title: 'Essentia + TensorFlow scoring', meta: '07:33 AM | #proj-lickdude', body: 'Essentia + TensorFlow scoring\n#proj-lickdude' },
-    { title: 'Teensy 4.1/Audio Shield integration', meta: '07:33 AM | #proj-kickdude', body: 'Teensy 4.1/Audio Shield integration\n#proj-kickdude' },
-    { title: 'Local cajon artisan', meta: '07:33 AM | #proj-lildude', body: 'Local cajon artisan\n#proj-lildude' },
-    { title: 'lake atitlan tech meet', meta: '09:33 AM | #proj-techmeet', body: 'meet at the dock at 0830.\nbring sunscreen and a laptop.\n\n[ ] confirm rsvp count\n[ ] book the boat' },
-    { title: 'greetings', meta: 'May 15 | press ? for keyboard s...', body: 'welcome note.' }
+  const title = document.getElementById('detail-title');
+  const body = document.getElementById('detail-body');
+  const search = document.getElementById('search-text');
+  const placeholder = document.getElementById('search-placeholder');
+  const indicator = document.getElementById('key-indicator');
+  const list = document.getElementById('demo-list');
+  const caption = document.getElementById('demo-caption');
+  const toggle = document.getElementById('demo-toggle');
+  const next = document.getElementById('demo-next');
+  const scenes = [
+    {label:'01 / capture',key:'c · new note',search:'',title:'a thought before it disappears',body:'Ship the client handoff\n#client-acme #tasks-nearterm\n\nKeep the brief, the plan, and the next action together.',caption:'Create a note without leaving the keyboard.'},
+    {label:'02 / Markdown',key:'Esc · save   m · raw / rendered',search:'',title:'handoff checklist',body:'<strong>Ready for the next person.</strong><br>☑ Write the brief<br>☐ Share the prototype<br>☐ Confirm the handoff<br><br><code>npm run build</code><br><span class="tag">#client-acme</span>',html:true,caption:'Plain text underneath. Headings, checklists, code, and more when you read.'},
+    {label:'03 / tag-pin',key:'Shift+P · tag-pin',search:'#client-acme',title:'Acme · standing brief',body:'Client context, above every project.\n\nDecision maker: Maya\nReview day: Thursday\n\n#client-acme #brief',caption:'Tag-pin the client brief above the project details.'},
+    {label:'04 / to_dude',key:'t → m · move to today',search:'#tasks-today',title:'Ship the client handoff',body:'From near-term → today.\n\nOne note. One next action.\n#client-acme #tasks-today',caption:'Turn a captured thought into today’s work with a task-list move.'},
+    {label:'05 / undo',key:'z · undo   Shift+Z · redo',search:'#tasks-nearterm',title:'Ship the client handoff',body:'Moved too soon? Take it back.\n\n#client-acme #tasks-nearterm',caption:'Undo note actions and ordinary saved text edits within the session.'},
+    {label:'06 / backup',key:'Shift+E · export',search:'',title:'your notes, to go.',body:'Export all notes → JSON backup\nImport a backup → Shift+I\n\nKeep a copy somewhere you control.',caption:'Back up the notebook without copying notes one at a time.'}
   ];
-
-  function tagify(text) {
-    // wrap #foo in <span class="tag">
-    return text.replace(/(#[a-z0-9_\-\/]+)/gi, '<span class="tag">$1</span>');
-  }
-  function renderTodos(text) {
-    return text
-      .replace(/^\[x\] (.*)$/gm, '<span class="todo-done">☑ $1</span>')
-      .replace(/^\[ \] (.*)$/gm, '☐ $1');
-  }
-
-  function renderList(notes, filter) {
-    listEl.innerHTML = '';
-    notes.forEach((n, i) => {
-      const div = document.createElement('div');
-      div.className = 'demo-note' + (n.selected ? ' selected' : '');
-      if (filter && !((n.title + ' ' + n.meta + ' ' + (n.body||'')).toLowerCase().includes(filter.toLowerCase()))) {
-        div.classList.add('hidden');
-      }
-      div.innerHTML = `
-        <div class="demo-note-title">${n.title}</div>
-        <div class="demo-note-meta">${tagify(n.meta)}</div>
-      `;
-      listEl.appendChild(div);
+  let index=0, paused=window.matchMedia('(prefers-reduced-motion: reduce)').matches, timer;
+  function render(){
+    const s=scenes[index];
+    title.textContent=s.title;
+    if(s.html) body.innerHTML=s.body; else body.textContent=s.body;
+    search.textContent=s.search; placeholder.hidden=!!s.search;
+    indicator.textContent=s.key; indicator.classList.add('show');
+    caption.textContent=s.label+' — '+s.caption;
+    list.innerHTML='';
+    [s.title,'Acme · standing brief','Prototype review','Weekend ideas'].forEach((name,i)=>{
+      const row=document.createElement('div'); row.className='demo-note'+(i===0?' selected':'');
+      const heading=document.createElement('div'); heading.className='demo-note-title'; heading.textContent=name;
+      const meta=document.createElement('div'); meta.className='demo-note-meta'; meta.textContent=i===0?'just now | '+(s.search||'#client-acme'):'#project';
+      row.append(heading,meta); list.append(row);
     });
+    toggle.textContent=paused?'play demo':'pause demo';
   }
-
-  function showKey(text) {
-    keyIndicator.textContent = text;
-    keyIndicator.classList.add('show');
-  }
-  function hideKey() {
-    keyIndicator.classList.remove('show');
-  }
-
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
-
-  async function typeInto(el, text, delay = 45, opts={}) {
-    const isHTML = opts.html;
-    let current = '';
-    el.innerHTML = isHTML ? '' : '';
-    for (let i = 0; i < text.length; i++) {
-      current += text[i];
-      if (isHTML) {
-        el.innerHTML = tagify(renderTodos(current)) + '<span class="typing-cursor"></span>';
-      } else {
-        el.innerHTML = current + '<span class="typing-cursor in-title"></span>';
-      }
-      await sleep(delay + Math.random() * 30);
-    }
-    // remove cursor
-    if (isHTML) {
-      el.innerHTML = tagify(renderTodos(current));
-    } else {
-      el.innerHTML = current;
-    }
-  }
-
-  async function typeSearch(text, delay = 60, notes) {
-    searchPlaceholder.style.display = 'none';
-    searchCursor.classList.remove('hidden');
-    let current = '';
-    for (let i = 0; i < text.length; i++) {
-      current += text[i];
-      searchText.textContent = current;
-      if (notes) renderList(notes, current);
-      await sleep(delay + Math.random() * 40);
-    }
-  }
-
-  async function clearSearch() {
-    searchText.textContent = '';
-    searchPlaceholder.style.display = '';
-    searchCursor.classList.add('hidden');
-  }
-
-  async function runDemo() {
-    while (true) {
-      // ── reset
-      const notes = JSON.parse(JSON.stringify(initialNotes));
-      renderList(notes, null);
-      titleEl.style.display = '';
-      titleEl.innerHTML = '';
-      bodyEl.innerHTML = '';
-      await clearSearch();
-      hideKey();
-      await sleep(1400);
-
-      // ── hint: create shortcut
-      showKey('c · create');
-      await sleep(1000);
-      hideKey();
-      await sleep(400);
-
-      // ── press c
-      showKey('c · new note');
-      await sleep(700);
-      notes.unshift({ title: 'New Note', meta: '09:35 PM | No Content', body: '', selected: true });
-      notes.forEach((n, i) => { if (i !== 0) n.selected = false; });
-      renderList(notes, null);
-      titleEl.style.display = '';
-      titleEl.innerHTML = '';
-      bodyEl.innerHTML = '';
-      await sleep(500);
-      hideKey();
-      await sleep(300);
-
-      // ── type body with live title update
-      const body = "test MCP integration with Claude Code\n#proj-notedude";
-      let current = '';
-      for (let i = 0; i < body.length; i++) {
-        current += body[i];
-        bodyEl.innerHTML = tagify(renderTodos(current)) + '<span class="typing-cursor"></span>';
-        // extract first line for title
-        const firstLine = current.split('\n')[0];
-        notes[0].title = firstLine || 'New Note';
-        notes[0].body = current;
-        renderList(notes, null);
-        await sleep(32 + Math.random() * 30);
-      }
-      bodyEl.innerHTML = tagify(renderTodos(body));
-      notes[0].body = body;
-      notes[0].meta = '09:35 PM | #proj-notedude';
-      renderList(notes, null);
-      await sleep(900);
-
-      // ── press /
-      showKey('/ · search');
-      await sleep(700);
-      hideKey();
-
-      // ── type #proj-notedude in search
-      await typeSearch('#proj-notedude', 70, notes);
-      await sleep(1800);
-
-      // ── press Esc
-      showKey('Esc · back to library');
-      await sleep(700);
-      hideKey();
-      await clearSearch();
-      renderList(notes, null);
-      await sleep(1200);
-    }
-  }
-
-  // small initial state so the page doesn't look empty before JS runs
-  renderList(initialNotes, null);
-  titleEl.innerHTML = '<span style="color:var(--fg-dimmer)">loading demo...</span>';
-  bodyEl.innerHTML = '';
-
-  // start demo
-  runDemo();
-})();
-
-// ─────────── DONATE: amount selection ───────────
-(function(){
-  const buttons = document.querySelectorAll('.amount-btn');
-  const custom = document.getElementById('custom-amt');
-  buttons.forEach(b => {
-    b.addEventListener('click', () => {
-      buttons.forEach(x => x.classList.remove('selected'));
-      b.classList.add('selected');
-      custom.value = '';
-    });
-  });
-  custom.addEventListener('input', () => {
-    if (custom.value) {
-      buttons.forEach(x => x.classList.remove('selected'));
-    }
-  });
+  function schedule(){clearTimeout(timer);if(!paused)timer=setTimeout(()=>{index=(index+1)%scenes.length;render();schedule();},4800);}
+  toggle.addEventListener('click',()=>{paused=!paused;render();schedule();});
+  next.addEventListener('click',()=>{index=(index+1)%scenes.length;render();schedule();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else schedule();});
+  render();schedule();
 })();
 
 // ─────────── DONATE: crypto reveal & copy ───────────
